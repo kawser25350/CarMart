@@ -1,0 +1,15 @@
+.homeheader {
+   background-color: #e1ff51 !important; 
+}
+
+.headertext{
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #00272c;
+}
+
+.bodytext{
+    color: #e1ff51;
+}
+
