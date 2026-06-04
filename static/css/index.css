@@ -1,15 +1,16 @@
 .homeheader {
-   background-color: #e1ff51 !important; 
+   background-color: #dcd3d3ab !important; 
 }
 
 .headertext{
     text-decoration: none;
     font-size: 1.5rem;
     font-weight: bold;
-    color: #00272c;
+    color: white;
 }
 
 .bodytext{
-    color: #e1ff51;
+    color: white;
 }
+
 
