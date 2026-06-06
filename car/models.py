@@ -5,6 +5,7 @@ from accounts.models import Account
 
 class Car(models.Model):
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to="cars/", blank=True, null=True)
     model_name = models.CharField(max_length=150)
     cc = models.IntegerField()
     release_year = models.IntegerField()
