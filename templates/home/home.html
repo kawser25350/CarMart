@@ -13,7 +13,7 @@
         <div class="col p-2 d-flex  align-items-center ">
             
             <div class="d-flex flex-column gap-2">
-                <h1 class="  bodytext"  >Welcome to CartMart</h1>
+                <h1 class="  bodytext"  >Welcome to CarMart</h1>
                 <h4 class="bodytext">Find your perfect car with confidence and ease.</h4>
                 <p class="bodytext">Buy, sell, and explore the best cars in one place. Whether you're looking for a budget-friendly ride or a luxury machine, CarMart makes it simple, fast, and reliable.</p>
             </div>
@@ -78,12 +78,12 @@
             <div class="card-body">
                 <h4>Model:{{c.model_name}}</h4>
                 <p class="font-w ">Brand: {{c.brand.name}}</p>
-                <a href="" class="btn btn-outline-dark  w-100 " >Buy Now</a>
+                <a href="{% url 'car_details' pk=c.pk %}" class="btn btn-outline-dark  w-100 " >Buy Now</a>
             </div>
         </div>
         {% endfor %}
     </div>
-    <hr style="color: white;">
+    <hr class="p-3" style="color: white;">
     
 </div>
 

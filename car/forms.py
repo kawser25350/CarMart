@@ -1,8 +1,13 @@
 from django import forms
-from .models import Comment
+from .models import Comment,Car
 
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = '__all__'
+        fields = ["body"]
+        
+class CarForm(forms.ModelForm):
+    class Meta:
+        model=Car
+        fields="__all__"
         

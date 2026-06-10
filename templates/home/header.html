@@ -15,8 +15,24 @@
       
       <div>
         {% if request.user.is_authenticated %}
-         {{request.user.username}}
+
+        <!-- <div class=" d-flex  justify-content-center ">
+          <div class=""><p>{{request.user.username}}</p></div>
+          <div class=""><i class="fa-regular fa-circle-user"></i></div>
+        </div> -->
+        
+        
+        <div>
+          <a href="{% url 'home' %}" class="ms-2  d-inline-flex align-items-center gap-2" style="text-decoration: none;">
+            <i class="fa-regular fa-circle-user fs-5"></i>
+            <span>{{ request.user.username }}</span>
+          </a>
+        </div>
+        
+        
+
         {% else %}
+
         <a href="{% url 'register' %}" class="btn btn-dark bodytext   shadow " style="background-color:  #00272c; " >SignUp</a>
         <a href="{% url 'login' %}" class="btn btn-dark bodytext  shadow " style="background-color:  #00272c;  " >Login</a>
         {% endif %}

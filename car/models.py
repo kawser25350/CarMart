@@ -18,6 +18,6 @@ class Car(models.Model):
 
 class Comment(models.Model):
     user=models.ForeignKey(Account,on_delete=models.CASCADE)
-    Car=models.ForeignKey(Car,on_delete=models.CASCADE)
+    car=models.ForeignKey(Car,on_delete=models.CASCADE)
     body=models.TextField()
     time=models.DateTimeField(auto_now_add=True)
