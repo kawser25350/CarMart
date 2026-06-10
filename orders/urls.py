@@ -17,9 +17,9 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path,include
-
+from . import views
 urlpatterns = [
 
-   
+   path('<int:pk>/', views.OrderView.as_view(),name='ordercar')
     
 ]
