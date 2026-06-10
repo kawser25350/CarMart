@@ -13,8 +13,9 @@
     
     
     
-    <form action="" method="POST" class=" shadow shadow-lg rounded-3  ">
+    <form action="{% url "ordercar"  car.pk %}" method="POST" class=" shadow shadow-lg rounded-3  ">
         <h1 class=" text-center"> Car Details </h1>
+        {% csrf_token %}
         <div class="card mb-3 p-3">
             <img class="card-img-top" src="{{car.image.url}}"  alt="Card image cap">
             <div class="card-body">
@@ -24,10 +25,19 @@
                 <p class="card-text">Price: ${{car.price}}</p>
                 <p class="card-text">Quantity: {{car.quantity}}</p>
             </div>
+            
         </div>
-        <button  class="btn btn-success w-100 "  class="w-100">Make Payment</button>
+        {% if car.quantity <= 0 %}
+        <button disabled class="btn btn-secondary w-100">
+            Stock Out
+        </button>
+        {% else %}
+        <button type="submit" class="btn btn-success w-100 "  class="w-100">Make Payment</button>
+        {% endif %}
     </form>
-
+    
+    
+    
     <div class="row p-3">
         <div class="col">
             <h3 class="text-white">Comments</h3>
@@ -43,15 +53,15 @@
             {% endfor %}
         </div>
     </div>
-
+    
     <div class=" bg-light p-5  rounded-3 mt-5 ">
-         <h1 class=" text-center"> CommentForm </h1>
+        <h1 class=" text-center"> Comment Here</h1>
         <form  method="POST">
             {% csrf_token %}
             {{ comment_form | crispy }}
             <button  class="btn btn-success w-100 "  style="background-color:  #00272c; " type="submit" class="w-100">Comment</button>
         </form>
-
+        
     </div>
     
 </div>
