@@ -1,6 +1,7 @@
 from django.db import models
 from brand.models import Brand
 from accounts.models import Account
+from django.contrib.auth.models import User
 
 
 class Car(models.Model):
@@ -17,7 +18,7 @@ class Car(models.Model):
         return f"{self.brand.name}-{self.model_name}"
 
 class Comment(models.Model):
-    user=models.ForeignKey(Account,on_delete=models.CASCADE)
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
     car=models.ForeignKey(Car,on_delete=models.CASCADE)
     body=models.TextField()
     time=models.DateTimeField(auto_now_add=True)

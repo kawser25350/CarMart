@@ -8,7 +8,7 @@
 
 {% include 'home/header.html' %}
 
-<div class="container d-flex justify-content-center align-items-center">
+<div class="container justify-content-center align-items-center">
     
     
     
@@ -18,13 +18,41 @@
         <div class="card mb-3 p-3">
             <img class="card-img-top" src="{{car.image.url}}"  alt="Card image cap">
             <div class="card-body">
-                <h5 class="card-title">{{car.model}}</h5>
-               
+                <h5 class="card-title">Model: {{car.model_name}} | {{car.cc}} CC</h5>
+                <p class="card-text fw-bold">Brand: {{car.brand.name}} </p>
+                <p class="card-text">Release Year: {{car.release_year}}</p>
+                <p class="card-text">Price: ${{car.price}}</p>
+                <p class="card-text">Quantity: {{car.quantity}}</p>
             </div>
         </div>
-        <button  class="btn btn-success w-100 "   type="submit" class="w-100">Make Payment</button>
+        <button  class="btn btn-success w-100 "  class="w-100">Make Payment</button>
     </form>
-    
+
+    <div class="row p-3">
+        <div class="col">
+            <h3 class="text-white">Comments</h3>
+            {% for comment in comments %}
+            <div class="card mb-2">
+                <div class="card-body">
+                    <p class="card-text ">{{ comment.body }}</p>
+                    <p class="card-text "><small class="text-muted">By {{ comment.user.username }} on {{ comment.time }}</small></p>
+                </div>
+            </div>
+            {% empty %}
+            <p class="text-white">No comments yet. Be the first to comment!</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class=" bg-light p-5  rounded-3 mt-5 ">
+         <h1 class=" text-center"> CommentForm </h1>
+        <form  method="POST">
+            {% csrf_token %}
+            {{ comment_form | crispy }}
+            <button  class="btn btn-success w-100 "  style="background-color:  #00272c; " type="submit" class="w-100">Comment</button>
+        </form>
+
+    </div>
     
 </div>
 {% endblock %}

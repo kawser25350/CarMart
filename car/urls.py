@@ -21,5 +21,4 @@ from . import views
 
 urlpatterns = [
     path("<int:pk>/",views.CarDetailView.as_view(), name='car_details'),
-    # path("<int:pk>/",views.AddCommentView.as_view(),name='add_comment'),
 ]

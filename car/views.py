@@ -13,7 +13,17 @@ class CarDetailView(DetailView):
     def get_context_data(self,**kwargs):
         context=super().get_context_data(**kwargs)
         context['comment_form']=CommentForm()
-        context['commets']=Comment.objects.filter(car=self.object)
+        context['comments']=Comment.objects.filter(car=self.object)
         return context
-class AddCommentView(DetailView):
-    pass
+        
+    def post(self,request,*args,**kwargs):
+        self.object=self.get_object()
+        
+        form=CommentForm(request.POST)
+
+        if form.is_valid():
+            comment=form.save(commit=False)
+            comment.car=self.object
+            comment.user=request.user
+            comment.save()
+        return self.get(request,*args,**kwargs)
