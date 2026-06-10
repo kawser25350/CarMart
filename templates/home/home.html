@@ -9,21 +9,31 @@
 
 <div class="container">
     
-    <div class="row justify-content-center p-3 mt-5" style="height: 400px;">
-        <div class="col-6 p-2 d-flex align-items-center ">
+    <div class="row justify-content-center p-3  mt-5 " >
+        <div class="col p-2 d-flex  align-items-center ">
             
-            <div>
-                <h1 class="  bodytext"  >Welcome to CartMart</h1>
+            <div class="d-flex flex-column gap-2">
+                <h1 class="  bodytext"  >Welcome to CarMart</h1>
                 <h4 class="bodytext">Find your perfect car with confidence and ease.</h4>
                 <p class="bodytext">Buy, sell, and explore the best cars in one place. Whether you're looking for a budget-friendly ride or a luxury machine, CarMart makes it simple, fast, and reliable.</p>
             </div>
         </div>
-        <div class="col-6 p-2  ">
+        <div class="col p-2 d-flex align-items-center mb-3  ">
             
             
             
             <div id="carouselExampleControls" class="carousel slide rounded-4 overflow-hidden" data-bs-ride="carousel">
                 <div class="carousel-inner">
+                    {% comment %} Use up to 4 cars from `cars` for the carousel; fall back to static images if none available {% endcomment %}
+                    {% for car in cars|slice:":4" %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        {% if car.image %}
+                        <img class="d-block w-100" src="{{ car.image.url }}" alt="{{ car.brand.name }} {{ car.model_name }}">
+                        {% else %}
+                        <img class="d-block w-100" src="{% static 'images/car1.png' %}" alt="placeholder">
+                        {% endif %}
+                    </div>
+                    {% empty %}
                     <div class="carousel-item active">
                         <img class="d-block w-100"  src="{% static 'images/car1.png' %}" alt="First slide">
                     </div>
@@ -36,6 +46,7 @@
                     <div class="carousel-item">
                         <img class="d-block w-100"  src="{% static 'images/car4.png' %}" alt="Third slide">
                     </div>
+                    {% endfor %}
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -49,13 +60,31 @@
             
         </div>
     </div>
-
+    <hr class="p-2" style="color: white;">
+    
     <div class=" d-flex flex-wrap p-3 gap-2">
         {% for b in brands %}
-        <div class=" btn btn-outline-light  ">{{b.name}}</div>
+        <a class="btn btn-outline-light" href="{% url 'home' %}?brand={{ b.name|urlencode }}">{{ b.name }}</a>
         {% endfor %}
+        <a class="btn btn-outline-light" href="{% url 'home' %}">All</a>
         
     </div>
+    <h3 class="text-white p-2">Result Found:{{cars | length }}</h3>
+    
+    <div class="row d-flex gap-5  justify-content-center">
+        {% for c in cars %}
+        <div class="card p-2" style="width: 18rem;">
+            <img class="card-img-top rounded-3 " src="{{c.image.url}}" alt="Card image cap">
+            <div class="card-body">
+                <h4>Model:{{c.model_name}}</h4>
+                <p class="font-w ">Brand: {{c.brand.name}}</p>
+                <a href="{% url 'car_details' pk=c.pk %}" class="btn btn-outline-dark  w-100 " >Buy Now</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <hr class="p-3" style="color: white;">
+    
 </div>
 
 {% endblock %}
