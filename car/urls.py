@@ -19,6 +19,8 @@ from django.contrib import admin
 from django.urls import path,include
 from . import views
 
+
 urlpatterns = [
     path("<int:pk>/",views.CarDetailView.as_view(), name='car_details'),
+    path('comments/',views.CommentViews.as_view(),name='comments')
 ]

@@ -32,23 +32,31 @@
         
         <div class="col-md-9 ">
             
-            
-            
-            
-            
-            <div class=" bg-light p-5  rounded-3 ">
-                <h1 class=" text-center"> Account Detials </h1>
-                <form action="" method="POST">
-                    {% csrf_token %}
-                    {{form | crispy }}
-                    <button class="btn btn-success w-100"  style="background-color:  #00272c; text-decoration: none;" type="submit" class="w-100">Change</button>
-                </form>
+            <div class="p-3">
+                
+                <h2 class="text-center text-light p-2">My Orders</h2>
+                
+                <div class="container">
+                    
+                    {% for order in orders %}
+                    <div class="card mb-3 p-3">
+                        
+                        <h5>{{ order.car.model_name }}</h5>
+                        <p>Brand: {{ order.car.brand.name }}</p>
+                        <p>Price: ${{ order.price }}</p>
+                        <p>Date: {{ order.date_time }}</p>
+                        
+                    </div>
+                    {% empty %}
+                    <p>No orders yet.</p>
+                    {% endfor %}
+                    
+                </div>
+                
+                
+                
                 
             </div>
-            
-            
-            
-            
             
             
             

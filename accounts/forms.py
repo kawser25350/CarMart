@@ -59,13 +59,13 @@ class UserUpdateForm(forms.ModelForm):
 
 
     def __init__(self,*args,**kwargs):
-        super().__init__(self,*args,**kwargs)
+        super().__init__(*args,**kwargs)
 
         if self.instance.pk:
             account=self.instance.account
             self.fields['date_of_birth'].initial=account.date_of_birth
             self.fields['phone'].initial=account.phone
-            self.fields['address'].initial=accout.address
+            self.fields['address'].initial=account.address
 
     def save(self,commit=True):
         user=super().save(commit=False)
@@ -73,7 +73,7 @@ class UserUpdateForm(forms.ModelForm):
         account=user.account 
 
         account.date_of_birth=self.cleaned_data['date_of_birth']
-        accout.phone=self.cleaned_data['phone']
+        account.phone=self.cleaned_data['phone']
         account.address=self.cleaned_data['address']
 
         if commit:
