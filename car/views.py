@@ -1,11 +1,11 @@
 from django.shortcuts import render
-from django.views.generic import DetailView
+from django.views.generic import DetailView,ListView
 from .models import Car,Comment
 from .forms import CommentForm
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
-class CarDetailView(DetailView):
+class CarDetailView(LoginRequiredMixin,DetailView):
     model=Car
     template_name='car/car_details.html'
     context_object_name="car"
@@ -27,3 +27,13 @@ class CarDetailView(DetailView):
             comment.user=request.user
             comment.save()
         return self.get(request,*args,**kwargs)
+
+class CommentViews(LoginRequiredMixin,ListView):
+    model = Comment
+    template_name='car/comments.html'
+    context_object_name='comments'
+    
+   
+
+    def get_queryset(self):
+        return Comment.objects.filter(user=self.request.user)

@@ -32,23 +32,32 @@
         
         <div class="col-md-9 ">
             
-            
-            
-            
-            
-            <div class=" bg-light p-5  rounded-3 ">
-                <h1 class=" text-center"> Account Detials </h1>
-                <form action="" method="POST">
-                    {% csrf_token %}
-                    {{form | crispy }}
-                    <button class="btn btn-success w-100"  style="background-color:  #00272c; text-decoration: none;" type="submit" class="w-100">Change</button>
-                </form>
+            <div class="p-3">
+                
+                <h2 class="text-center text-light p-2">My Orders</h2>
+                
+                <div class="container">
+                    
+                    {% for c in comments %}
+                    <div class="card mb-3 p-3">
+                        
+                        <a href="{% url 'car_details' c.car.pk %}" class="text-decoration-none "><h5>{{ c.car.model_name }}</h5></a>    
+                        
+                        <p>Comment: {{ c.body }}</p>
+                        
+                        <p>Date: {{ c.time }}</p>
+                        
+                    </div>
+                    {% empty %}
+                    <p>No comments yet.</p>
+                    {% endfor %}
+                    
+                </div>
+                
+                
+                
                 
             </div>
-            
-            
-            
-            
             
             
             
